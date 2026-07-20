@@ -163,8 +163,17 @@
               <form id="rsvpForm">
                 <label class="titulo">Nombre Completo</label>
                 <input type="text" name="nombre" placeholder="Escribe tu nombre" required>
-                <label class="titulo">Nombre de acompañantes</label>
-                <input type="text" name="acompanantes" placeholder="Escribe los nombres (si aplica)">
+                
+                <!-- 3 ESPACIOS PARA ACOMPAÑANTES -->
+                <label class="titulo">Acompañante 1</label>
+                <input type="text" name="acompanante1" placeholder="Nombre del acompañante 1">
+                
+                <label class="titulo">Acompañante 2</label>
+                <input type="text" name="acompanante2" placeholder="Nombre del acompañante 2">
+                
+                <label class="titulo">Acompañante 3</label>
+                <input type="text" name="acompanante3" placeholder="Nombre del acompañante 3">
+
                 <label class="titulo">¿Asistirás?</label>
                 <div class="opciones-asistencia">
                   <label class="opcion-item"><input type="radio" name="asistencia" value="1" checked> SÍ, ASISTIRÉ</label>
@@ -253,6 +262,9 @@
           })
           .catch(error => { alert('Hubo un error al enviar.'); btn.disabled = false; btn.innerText = 'Enviar Respuesta'; });
         });
+    </script>
+</body>
+</html>
     </script>
 </body>
 </html>
