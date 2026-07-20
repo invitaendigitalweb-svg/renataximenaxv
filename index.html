@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- META ETIQUETAS PARA WHATSAPP -->
+    <meta property="og:title" content="¡Mis XV Años!">
+    <meta property="og:description" content="Te invito a celebrar conmigo este día tan especial. ¡No faltes!">
+    <meta property="og:image" content="https://tu-dominio.com/portada.jpg">
+    <meta property="og:url" content="https://tu-dominio.com/tu-pagina.html">
+    <meta property="og:type" content="website">
+ 
+    <title>Invitación XV Años</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        body { margin: 0; padding: 0; font-family: 'Cinzel', serif; background-color: #000; }
+        .contenedor-principal { width: 100%; max-width: 500px; margin: 0 auto; position: relative; }
+        .foto-seccion { width: 100%; display: block; height: auto; }
+ 
+        /* ANIMACIONES */
+        @keyframes entrarElegante { from { opacity: 0; transform: translateY(50px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes entrarLateral { from { opacity: 0; transform: translateX(100px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes animPadre { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+        @keyframes dinamico { 0% { transform: scale(0.5) rotate(-10deg); opacity: 0; } 100% { transform: scale(1) rotate(0deg); opacity: 1; } }
+ 
+        .animar-fecha, .animar-lugar, .animar-entrada, .animar-dinamico { opacity: 0; }
+        
+        .visible { animation: entrarElegante 1s ease-out forwards; }
+        .visible-lugar { animation: entrarLateral 1s ease-out forwards; }
+        .animar-entrada.visible { animation: animPadre 1s ease-out forwards; }
+        .animar-dinamico.visible { animation: dinamico 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+ 
+        /* OVERLAY */
+        #overlay { 
+            position: fixed; top: 0; left: 50%; transform: translateX(-50%); 
+            width: 100%; max-width: 500px; height: 100%; 
+            background-color: #000; 
+            background-image: url('foto.jpg'); 
+            background-size: cover; background-position: center; background-repeat: no-repeat; 
+            z-index: 9999; display: flex; align-items: center; justify-content: center; 
+            transition: opacity 1s ease; 
+        }
+        .ocultar { opacity: 0; pointer-events: none; }
+        
+        /* BOTÓN AJUSTADO */
+        .btn-entrar { 
+            padding: 10px 15px; 
+            font-size: 14px; 
+            cursor: pointer; 
+            background: rgba(0, 0, 0, 0.5); 
+            color: white; 
+            border: 1px solid white; 
+            font-family: 'Cinzel', serif; 
+            border-radius: 5px; 
+            width: auto; 
+            white-space: nowrap;
+        }
+        
+        #control-musica { position: fixed; top: 20px; right: -50px; z-index: 9999; background: #87CEEB; padding: 12px; border-radius: 50%; transition: right 0.5s ease; cursor: pointer; box-shadow: 0 0 10px rgba(135, 206, 235, 0.5); }
+        .mostrar-musica { right: 20px !important; }
+        
+        .contenedor-portada { position: relative; z-index: 1; }
+        
+        #contador-contenedor { position: absolute; bottom: 5%; width: 100%; display: flex; justify-content: center; gap: 8px; z-index: 10; }
+        .box-c { text-align: center; border: 1px solid rgba(255, 255, 255, 0.7); padding: 5px; width: 20%; background-color: rgba(0, 0, 0, 0.4); }
+        .num-c { font-size: clamp(16px, 5vw, 24px); color: white; }
+        .lab-c { font-size: clamp(8px, 2vw, 10px); color: white; text-transform: uppercase; }
+        
+        .contenedor-btn { position: absolute; bottom: 3%; width: 100%; display: flex; justify-content: center; z-index: 10; }
+        .btn-ubicacion { padding: 15px 0; width: 80%; max-width: 300px; background-color: white; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-decoration: none; font-size: 18px; text-align: center; }
+ 
+        .carrusel-contenedor { position: relative; width: 100%; height: 500px; overflow: hidden; background-color: #000; }
+        .foto-carrusel { position: absolute; width: 100%; height: 100%; object-fit: cover; object-position: top; opacity: 0; transition: opacity 1s ease-in-out; }
+        .foto-carrusel.active { opacity: 1; }
+
+        /* ESTILOS FORMULARIO */
+        :root {
+          --color-principal: #87CEEB;
+          --color-oscuro: #5F9EA0;
+          --color-dorado-texto: #B38E5D;
+          --color-texto-suave: #8A7A6B;
+          --color-borde: #D1C4B6;
+          --color-fondo-input: #FAF6F0;
+        }
+        .form-wrapper { background-color: #000; padding: 20px; }
+        .form-container { width: 100%; max-width: 340px; margin: auto; box-sizing: border-box; }
+        label.titulo { display: block; margin-top: 28px; font-family: 'Cinzel', serif; font-weight: 600; font-size: 13px; margin-bottom: 10px; color: var(--color-dorado-texto); letter-spacing: 3px; text-transform: uppercase; }
+        input[type="text"], select, textarea { width: 100%; padding: 12px 15px; border: 1px solid var(--color-borde); border-radius: 12px; box-sizing: border-box; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 12px; background-color: var(--color-fondo-input); color: var(--color-texto-suave); margin-bottom: 5px; outline: none; transition: all 0.3s ease; }
+        .opciones-asistencia { display: flex; border: 1px solid var(--color-borde); border-radius: 12px; overflow: hidden; background-color: var(--color-fondo-input); gap: 1px; }
+        .opcion-item { flex: 1; display: flex; align-items: center; justify-content: center; padding: 12px 5px; cursor: pointer; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 1px; color: var(--color-texto-suave); transition: all 0.3s ease; text-align: center; }
+        .opcion-item input { display: none; }
+        .opcion-item:has(input:checked) { background-color: var(--color-principal); color: #FFFFFF; }
+        button { background: linear-gradient(180deg, var(--color-principal) 0%, var(--color-oscuro) 100%); color: #FFFFFF; padding: 16px; border: none; border-radius: 25px; cursor: pointer; width: 100%; margin-top: 30px; font-size: 13px; font-family: 'Cinzel', serif; font-weight: 400; text-transform: uppercase; letter-spacing: 3px; box-shadow: 0 4px 10px rgba(135, 206, 235, 0.25); transition: all 0.3s ease; }
+        #exito { display: none; text-align: center; padding: 40px 10px; font-family: 'Cinzel', serif; }
+        #exito h3 { color: var(--color-principal); font-size: 16px; letter-spacing: 2px; line-height: 1.6; font-weight: 400; }
+    </style>
+</head>
+<body>
+ 
+    <div id="overlay">
+        <button class="btn-entrar" onclick="iniciarInvitacion()">VER INVITACIÓN</button>
+    </div>
+    <div id="control-musica"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg></div>
+    <audio id="musica" loop><source src="musica.mp3" type="audio/mpeg"></audio>
+ 
+    <div class="contenedor-principal">
+        <div class="contenedor-portada">
+            <img src="portada.jpg" alt="Portada" class="foto-seccion">
+            <div id="contador-contenedor">
+               <div class="box-c"><div id="dias" class="num-c">00</div><div class="lab-c">Días</div></div>
+                <div class="box-c"><div id="horas" class="num-c">00</div><div class="lab-c">Hrs.</div></div>
+                <div class="box-c"><div id="minutos" class="num-c">00</div><div class="lab-c">Min.</div></div>
+                <div class="box-c"><div id="segundos" class="num-c">00</div><div class="lab-c">Seg.</div></div>
+            </div>
+        </div>
+ 
+        <div class="animar-entrada"><img src="frase.jpg" alt="Frase" class="foto-seccion"></div>
+        <div class="animar-entrada"><img src="padres.jpg" alt="Padres" class="foto-seccion"></div>
+        
+        <div id="seccion-fecha" class="animar-fecha"><img src="fecha.jpg" alt="Fecha" class="foto-seccion"></div>
+        <div id="seccion-lugar" class="animar-lugar">
+            <img src="lugar.jpg" alt="Lugar" class="foto-seccion">
+            <div class="contenedor-btn">
+                <a href="https://www.google.com/maps/place/Quinta+Chozet/@28.7617062,-106.1549237,1715m/data=!3m2!1e3!4b1!4m6!3m5!1s0x86ea4106d98856e3:0xc04e65d6cd915bd8!8m2!3d28.7617062!4d-106.1549237!16s%2Fg%2F11y467qdl2?entry=ttu&g_ep=EgoyMDI2MDcxNS4wIKXMDSoASAFQAw%3D%3D" class="btn-ubicacion" target="_blank">Ver ubicación</a>
+            </div>
+        </div>
+ 
+        <div id="seccion-galeria">
+            <img src="galeria.jpg" alt="Galería" class="foto-seccion">
+            <div class="carrusel-contenedor">
+                <a href="#"><img src="https://i.imgur.com/R32LO30.jpeg" class="foto-carrusel active"></a>
+                <a href="#"><img src="https://i.imgur.com/Ut0WTHj.jpeg" class="foto-carrusel"></a>
+                <a href="#"><img src="https://i.imgur.com/UpitvbR.jpeg" class="foto-carrusel"></a>
+           </div>
+        </div>
+ 
+        <div class="animar-entrada"><img src="vestimenta.jpg" alt="Vestimenta" class="foto-seccion"></div>
+        <div class="animar-entrada"><img src="https://i.imgur.com/xwTCLfq.jpeg" alt="Detalle" class="foto-seccion"></div>
+        <div class="animar-entrada"><img src="regalos.jpg" alt="Regalos" class="foto-seccion"></div>
+        <div class="animar-dinamico"><a href="https://i.imgur.com/rf19Ah0.jpeg"><img src="https://i.imgur.com/rf19Ah0.jpeg" alt="Link" class="foto-seccion"></a></div>
+        
+        <!-- CONFIRMACIÓN Y FORMULARIO -->
+        <div class="animar-entrada"><img src="confirmacion.jpg" alt="Confirmación" class="foto-seccion"></div>
+        
+        <div class="form-wrapper">
+          <div class="form-container">
+            <div id="formContent">
+              <form id="rsvpForm">
+                <label class="titulo">Nombre Completo</label>
+                <input type="text" name="nombre" placeholder="Escribe tu nombre" required>
+                <label class="titulo">Nombre de acompañantes</label>
+                <input type="text" name="acompanantes" placeholder="Escribe los nombres (si aplica)">
+                <label class="titulo">¿Asistirás?</label>
+                <div class="opciones-asistencia">
+                  <label class="opcion-item"><input type="radio" name="asistencia" value="1" checked> SÍ, ASISTIRÉ</label>
+                  <label class="opcion-item"><input type="radio" name="asistencia" value="0"> NO PODRÉ ASISTIR</label>
+                </div>
+                <label class="titulo">Mensaje o felicitación</label>
+                <textarea name="mensaje" rows="3" placeholder="Escribe tu mensaje (opcional)"></textarea>
+                <button type="submit" id="btn">Enviar Respuesta</button>
+              </form>
+            </div>
+            <div id="exito">
+              <h3>¡Muchas gracias!<br>Tu respuesta ha sido enviada.</h3>
+            </div>
+          </div>
+        </div>
+    </div>
+ 
+    <script>
+        function iniciarInvitacion() {
+           document.getElementById("musica").play();
+           document.getElementById("overlay").classList.add('ocultar');
+           document.getElementById("control-musica").classList.add('mostrar-musica');
+           setTimeout(() => { document.getElementById("overlay").style.display = "none"; }, 1000);
+        }
+ 
+        const observerOptions = { threshold: 0.2 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                   entry.target.classList.remove('visible', 'visible-lugar');
+                   void entry.target.offsetWidth; 
+                   if (entry.target.classList.contains('animar-lugar')) { entry.target.classList.add('visible-lugar'); }
+                   else { entry.target.classList.add('visible'); }
+                } else { entry.target.classList.remove('visible', 'visible-lugar'); }
+            });
+        }, observerOptions);
+ 
+        document.querySelectorAll('.animar-fecha, .animar-lugar, .animar-entrada, .animar-dinamico').forEach(el => observer.observe(el));
+ 
+        const cuenta = new Date("Aug 15, 2026 21:00:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime(), dist = cuenta - now;
+            document.getElementById("dias").innerHTML = Math.floor(dist / (1000*60*60*24)).toString().padStart(2, '0');
+            document.getElementById("horas").innerHTML = Math.floor((dist % (1000*60*60*24)) / (1000*60*60)).toString().padStart(2, '0');
+            document.getElementById("minutos").innerHTML = Math.floor((dist % (1000*60*60)) / (1000*60)).toString().padStart(2, '0');
+            document.getElementById("segundos").innerHTML = Math.floor((dist % (1000*60)) / 1000).toString().padStart(2, '0');
+        }, 1000);
+ 
+        let currentIndex = 0;
+        const fotos = document.querySelectorAll('.foto-carrusel');
+        setInterval(() => {
+            fotos[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % fotos.length;
+            fotos[currentIndex].classList.add('active');
+        }, 2000);
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzDJE4kICyF6J_ASiSva-ZGlJA0CZL3Uhenn7VFQYBFRIefM-Vcu7LD_ANpb3ITQKSSmA/exec';
+        const form = document.getElementById('rsvpForm');
+        const btn = document.getElementById('btn');
+        form.addEventListener('submit', e => {
+          e.preventDefault();
+          btn.disabled = true;
+          btn.innerText = 'Enviando...';
+          btn.classList.add('cargando');
+          fetch(scriptURL, { method: 'POST', body: new FormData(form), mode: 'no-cors' })
+          .then(() => {
+            document.getElementById('formContent').style.display = 'none';
+            document.getElementById('exito').style.display = 'block';
+          })
+          .catch(error => { alert('Hubo un error al enviar.'); btn.disabled = false; btn.innerText = 'Enviar Respuesta'; });
+        });
+    </script>
+</body>
+</html>
