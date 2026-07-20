@@ -58,7 +58,7 @@
             white-space: nowrap;
         }
         
-        #control-musica { position: fixed; top: 20px; right: -50px; z-index: 9999; background: #87CEEB; padding: 12px; border-radius: 50%; transition: right 0.5s ease; cursor: pointer; box-shadow: 0 0 10px rgba(135, 206, 235, 0.5); }
+        #control-musica { position: fixed; top: 20px; right: -50px; z-index: 9999; background: #87CEEB; padding: 12px; border-radius: 50%; transition: right 0.5s ease; cursor: pointer; box-shadow: 0 0 10px rgba(135, 206, 235, 0.5); display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; }
         .mostrar-musica { right: 20px !important; }
         
         .contenedor-portada { position: relative; z-index: 1; }
@@ -102,7 +102,13 @@
     <div id="overlay">
         <button class="btn-entrar" onclick="iniciarInvitacion()">VER INVITACIÓN</button>
     </div>
-    <div id="control-musica"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg></div>
+    
+    <div id="control-musica" onclick="toggleMusica()">
+        <svg id="icono-musica" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        </svg>
+    </div>
+    
     <audio id="musica" loop><source src="musica.mp3" type="audio/mpeg"></audio>
  
     <div class="contenedor-principal">
@@ -173,11 +179,29 @@
     </div>
  
     <script>
+        const audio = document.getElementById("musica");
+        const iconoMusica = document.getElementById("icono-musica");
+
+        // Iconos SVG para Reproducir (Nota Musical) y Pausa (Dos líneas verticales)
+        const svgPlay = '<path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>';
+        const svgPause = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+
         function iniciarInvitacion() {
-           document.getElementById("musica").play();
-           document.getElementById("overlay").classList.add('ocultar');
-           document.getElementById("control-musica").classList.add('mostrar-musica');
-           setTimeout(() => { document.getElementById("overlay").style.display = "none"; }, 1000);
+            audio.play();
+            iconoMusica.innerHTML = svgPause;
+            document.getElementById("overlay").classList.add('ocultar');
+            document.getElementById("control-musica").classList.add('mostrar-musica');
+            setTimeout(() => { document.getElementById("overlay").style.display = "none"; }, 1000);
+        }
+
+        function toggleMusica() {
+            if (audio.paused) {
+                audio.play();
+                iconoMusica.innerHTML = svgPause;
+            } else {
+                audio.pause();
+                iconoMusica.innerHTML = svgPlay;
+            }
         }
  
         const observerOptions = { threshold: 0.2 };
@@ -229,4 +253,3 @@
     </script>
 </body>
 </html>
-
