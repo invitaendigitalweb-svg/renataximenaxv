@@ -176,8 +176,8 @@
 
                 <label class="titulo">¿Asistirás?</label>
                 <div class="opciones-asistencia">
-                  <label class="opcion-item"><input type="radio" name="asistencia" value="1" checked> SÍ, ASISTIRÉ</label>
-                  <label class="opcion-item"><input type="radio" name="asistencia" value="0"> NO PODRÉ ASISTIR</label>
+                  <label class="opcion-item"><input type="radio" name="asistencia" value="asistencia" checked> SÍ, ASISTIRÉ</label>
+                  <label class="opcion-item"><input type="radio" name="asistencia" value="no asistencia"> NO PODRÉ ASISTIR</label>
                 </div>
                 <label class="titulo">Mensaje o felicitación</label>
                 <textarea name="mensaje" rows="3" placeholder="Escribe tu mensaje (opcional)"></textarea>
@@ -247,7 +247,7 @@
             fotos[currentIndex].classList.add('active');
         }, 2000);
 
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzDJE4kICyF6J_ASiSva-ZGlJA0CZL3Uhenn7VFQYBFRIefM-Vcu7LD_ANpb3ITQKSSmA/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxlIPXgvYUnJVXp_qgsc3JbUfD-V5qYsjT_pfwhCB07TRpKozvHxDPxcqndzCDaydwP2w/exec';
         const form = document.getElementById('rsvpForm');
         const btn = document.getElementById('btn');
         form.addEventListener('submit', e => {
@@ -262,9 +262,6 @@
           })
           .catch(error => { alert('Hubo un error al enviar.'); btn.disabled = false; btn.innerText = 'Enviar Respuesta'; });
         });
-    </script>
-</body>
-</html>
     </script>
 </body>
 </html>
