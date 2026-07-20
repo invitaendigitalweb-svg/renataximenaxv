@@ -71,7 +71,8 @@
         .contenedor-btn { position: absolute; bottom: 3%; width: 100%; display: flex; justify-content: center; z-index: 10; }
         .btn-ubicacion { padding: 15px 0; width: 80%; max-width: 300px; background-color: white; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-decoration: none; font-size: 18px; text-align: center; }
  
-        .carrusel-contenedor { position: relative; width: 100%; height: 500px; overflow: hidden; background-color: #000; }
+        /* CARRUSEL AJUSTADO: Se aumentó la altura a 600px para darles más espacio vertical */
+        .carrusel-contenedor { position: relative; width: 100%; height: 600px; overflow: hidden; background-color: #000; }
         .foto-carrusel { position: absolute; width: 100%; height: 100%; object-fit: cover; object-position: top; opacity: 0; transition: opacity 1s ease-in-out; }
         .foto-carrusel.active { opacity: 1; }
 
@@ -84,7 +85,7 @@
           --color-borde: #D1C4B6;
           --color-fondo-input: #FAF6F0;
         }
-        .form-wrapper { background-color: #000; padding: 20px; }
+        .form-wrapper { background-color: #000; padding: 20px; position: relative; z-index: 5; }
         .form-container { width: 100%; max-width: 340px; margin: auto; box-sizing: border-box; }
         label.titulo { display: block; margin-top: 28px; font-family: 'Cinzel', serif; font-weight: 600; font-size: 13px; margin-bottom: 10px; color: var(--color-dorado-texto); letter-spacing: 3px; text-transform: uppercase; }
         input[type="text"], select, textarea { width: 100%; padding: 12px 15px; border: 1px solid var(--color-borde); border-radius: 12px; box-sizing: border-box; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 12px; background-color: var(--color-fondo-input); color: var(--color-texto-suave); margin-bottom: 5px; outline: none; transition: all 0.3s ease; }
@@ -136,21 +137,22 @@
         <div id="seccion-galeria">
             <img src="galeria.jpg" alt="Galería" class="foto-seccion">
             <div class="carrusel-contenedor">
-                <a href="#"><img src="https://i.imgur.com/R32LO30.jpeg" class="foto-carrusel active"></a>
-                <a href="#"><img src="https://i.imgur.com/Ut0WTHj.jpeg" class="foto-carrusel"></a>
-                <a href="#"><img src="https://i.imgur.com/UpitvbR.jpeg" class="foto-carrusel"></a>
-                <a href="#"><img src="https://i.imgur.com/ps8LjdZ.jpeg" class="foto-carrusel"></a>
-                <a href="#"><img src="https://i.imgur.com/ijYP5uz.jpeg" class="foto-carrusel"></a>
-                
+                <img src="https://i.imgur.com/R32LO30.jpeg" class="foto-carrusel active">
+                <img src="https://i.imgur.com/Ut0WTHj.jpeg" class="foto-carrusel">
+                <img src="https://i.imgur.com/UpitvbR.jpeg" class="foto-carrusel">
+                <img src="https://i.imgur.com/ps8LjdZ.jpeg" class="foto-carrusel">
+                <img src="https://i.imgur.com/ijYP5uz.jpeg" class="foto-carrusel">
            </div>
         </div>
  
         <div class="animar-entrada"><img src="vestimenta.jpg" alt="Vestimenta" class="foto-seccion"></div>
         <div class="animar-entrada"><img src="https://i.imgur.com/xwTCLfq.jpeg" alt="Detalle" class="foto-seccion"></div>
         <div class="animar-entrada"><img src="regalos.jpg" alt="Regalos" class="foto-seccion"></div>
+        
+        <!-- Imagen dinámica sin enlace (fija) -->
         <div class="animar-dinamico">
-    <img src="https://i.imgur.com/rf19Ah0.jpeg" alt="Decoración" class="foto-seccion">
-</div>
+            <img src="https://i.imgur.com/rf19Ah0.jpeg" alt="Imagen fija" class="foto-seccion">
+        </div>
         
         <!-- CONFIRMACIÓN Y FORMULARIO -->
         <div class="animar-entrada"><img src="confirmacion.jpg" alt="Confirmación" class="foto-seccion"></div>
@@ -184,7 +186,6 @@
         const audio = document.getElementById("musica");
         const iconoMusica = document.getElementById("icono-musica");
 
-        // Iconos SVG para Reproducir (Nota Musical) y Pausa (Dos líneas verticales)
         const svgPlay = '<path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>';
         const svgPause = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
 
